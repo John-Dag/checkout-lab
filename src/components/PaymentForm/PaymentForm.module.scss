@@ -2,5 +2,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 100px;
+  gap: 15px;
+}
+
+.textInputName {
+  width: 100%;
+}
+
+.textInputEmail {
   width: 100%;
 }

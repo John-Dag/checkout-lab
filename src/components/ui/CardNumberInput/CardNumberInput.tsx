@@ -1,26 +1,33 @@
 import { useState } from 'react';
 import { TextInput } from '@mantine/core';
-import css from './TextInputGeneric.module.scss';
+import css from './CardNumberInput.module.scss';
 import type { TextInputGenericProps } from '../../../types/components/ui/TextInputGeneric/TextInputGenericProps';
-import { validateEmail } from '../../../utils/validation/validateEmail';
-import { DiscoverIcon } from '../icons/cards';
+import { detectCardType } from '../../../utils/validation/detectCardType';
+import { VisaIcon, MastercardIcon, AmexIcon, DiscoverIcon } from '../icons/cards';
 
-export const TextInputGeneric = ({
+const ICON_SIZE = 30;
+
+const cardIcons = {
+  visa: <VisaIcon size={ICON_SIZE} />,
+  mastercard: <MastercardIcon size={ICON_SIZE} />,
+  amex: <AmexIcon size={ICON_SIZE} />,
+  discover: <DiscoverIcon size={ICON_SIZE} />,
+};
+
+export const CardNumberInput = ({
   name,
   label,
   placeholder,
   className,
-  rightSection,
 }: TextInputGenericProps) => {
   const [focused, setFocused] = useState(false);
   const [value, setValue] = useState('');
-  const [error, setError] = useState<string | null>(null);
   const floating = value.trim().length !== 0 || focused || undefined;
 
+  const cardType = detectCardType(value);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const next = event.currentTarget.value;
-    setValue(next);
-    setError(validateEmail(next));
+    setValue(event.currentTarget.value);
   };
 
   return (
@@ -32,14 +39,16 @@ export const TextInputGeneric = ({
       className={className}
       classNames={css}
       value={value}
-      error={error}
       onChange={handleChange}
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
       mt="md"
-      autoComplete="nope"
+      autoComplete="cc-number"
+      inputMode="numeric"
+      maxLength={19}
       data-floating={floating}
-      labelProps={{ 'data-floating': floating, 'data-error': error ? true : undefined }}
+      rightSection={cardType ? cardIcons[cardType] : null}
+      labelProps={{ 'data-floating': floating }}
     />
   );
 };
