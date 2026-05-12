@@ -1,0 +1,64 @@
+.invoiceWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.invoiceInner {
+  width: 480px;
+}
+
+.invoiceGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 300px;
+}
+
+.invoiceLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.invoiceRight {
+  display: flex;
+  justify-content: end;
+}
+
+.invoiceMerchant {
+  color: var(--mantine-color-gray-5);
+}
+
+.invoiceTotal {
+  font-size: 28px;
+  color: white;
+}
+
+.invoiceItemGrid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 30px;
+  width: 100%;
+  margin-top: 24px;
+}
+
+.invoiceItem {
+  font-size: 16px;
+}
+
+.invoiceItemLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.invoiceItemRight {
+  display: flex;
+  flex-direction: column;
+}
+
+.divider {
+  margin: 25px 0;
+  border-top: 1px;
+}
