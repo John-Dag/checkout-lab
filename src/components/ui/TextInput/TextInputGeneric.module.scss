@@ -1,5 +1,6 @@
 .root {
   position: relative;
+  margin: 0 !important;
 }
 
 .label {
@@ -36,6 +37,8 @@
 }
 
 .input {
+  border-radius: 5px;
+
   &::placeholder {
     transition: color 150ms ease;
     color: transparent;

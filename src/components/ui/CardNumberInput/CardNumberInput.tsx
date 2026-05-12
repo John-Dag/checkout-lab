@@ -14,12 +14,7 @@ const cardIcons = {
   discover: <DiscoverIcon size={ICON_SIZE} />,
 };
 
-export const CardNumberInput = ({
-  name,
-  label,
-  placeholder,
-  className,
-}: TextInputGenericProps) => {
+export const CardNumberInput = ({ name, label, placeholder, className }: TextInputGenericProps) => {
   const [focused, setFocused] = useState(false);
   const [value, setValue] = useState('');
   const floating = value.trim().length !== 0 || focused || undefined;

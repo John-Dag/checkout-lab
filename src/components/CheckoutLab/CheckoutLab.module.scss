@@ -12,4 +12,32 @@
 .columnRight {
   background-color: white;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  padding-top: 250px;
+}
+
+.payButton {
+  width: 200px;
+  height: 45px;
+}
+
+.shippingWrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 300ms ease;
+  width: 100%;
+
+  &[data-visible] {
+    grid-template-rows: 1fr;
+  }
+
+  > * {
+    min-height: 0;
+  }
 }

@@ -3,7 +3,6 @@ import { TextInput } from '@mantine/core';
 import css from './TextInputGeneric.module.scss';
 import type { TextInputGenericProps } from '../../../types/components/ui/TextInputGeneric/TextInputGenericProps';
 import { validateEmail } from '../../../utils/validation/validateEmail';
-import { DiscoverIcon } from '../icons/cards';
 
 export const TextInputGeneric = ({
   name,
