@@ -18,7 +18,7 @@
   max-width: 480px;
 
   :global(.mantine-TextInput-root) {
-    margin-bottom: 25px !important;
+    margin-bottom: 35px !important;
   }
 }
 
@@ -38,4 +38,23 @@
 
 .textInputEmail {
   width: 100%;
+}
+
+.cityStateZip {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  width: 100%;
+}
+
+.city {
+  flex: 2;
+}
+
+.state {
+  flex: 1;
+}
+
+.zip {
+  flex: 1;
 }

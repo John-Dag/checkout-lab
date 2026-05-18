@@ -14,16 +14,19 @@ const cardIcons = {
   discover: <DiscoverIcon size={ICON_SIZE} />,
 };
 
-export const CardNumberInput = ({ name, label, placeholder, className }: TextInputGenericProps) => {
+export const CardNumberInput = ({
+  name,
+  label,
+  placeholder,
+  className,
+  value = '',
+  onChange,
+  onBlur,
+  error,
+}: TextInputGenericProps) => {
   const [focused, setFocused] = useState(false);
-  const [value, setValue] = useState('');
   const floating = value.trim().length !== 0 || focused || undefined;
-
   const cardType = detectCardType(value);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.currentTarget.value);
-  };
 
   return (
     <TextInput
@@ -34,16 +37,22 @@ export const CardNumberInput = ({ name, label, placeholder, className }: TextInp
       className={className}
       classNames={css}
       value={value}
-      onChange={handleChange}
+      error={error}
+      onChange={onChange}
       onFocus={() => setFocused(true)}
-      onBlur={() => setFocused(false)}
+      onBlur={() => {
+        setFocused(false);
+        onBlur?.();
+      }}
       mt="md"
+      size="md"
       autoComplete="cc-number"
+      rightSectionWidth={40}
       inputMode="numeric"
       maxLength={19}
       data-floating={floating}
       rightSection={cardType ? cardIcons[cardType] : null}
-      labelProps={{ 'data-floating': floating }}
+      labelProps={{ 'data-floating': floating, 'data-error': error ? true : undefined }}
     />
   );
 };

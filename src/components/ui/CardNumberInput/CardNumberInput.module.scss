@@ -1,12 +1,21 @@
 .root {
   position: relative;
   margin: 0 !important;
+
+  :global(.mantine-Input-wrapper) {
+    margin-bottom: 0 !important;
+  }
+}
+
+.error {
+  position: absolute;
+  bottom: -18px;
 }
 
 .label {
   position: absolute;
   z-index: 2;
-  top: 7px;
+  top: 9px;
   left: var(--mantine-spacing-sm);
   pointer-events: none;
   color: light-dark(var(--mantine-color-gray-5), var(--mantine-color-dark-3));

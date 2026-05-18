@@ -1,27 +1,10 @@
-export interface LineItem {
-  id: string;
-  name: string;
-  description?: string;
-  quantity: number;
-  unitPrice: number;
-  imageUrl?: string;
-}
+import {
+  type LineItem,
+  type Discount,
+  type CheckoutOrder,
+} from '../../types/api/fakeData/FakeDataTypes';
 
-export interface Discount {
-  code: string;
-  label: string;
-  amount: number;
-}
-
-export interface CheckoutOrder {
-  orderId: string;
-  merchantLabel: string;
-  items: LineItem[];
-  discount?: Discount;
-  shipping: number;
-  tax: number;
-  total: number;
-}
+export type { LineItem, Discount, CheckoutOrder };
 
 export const fakeOrder: CheckoutOrder = {
   orderId: 'ORD-2026-00142',

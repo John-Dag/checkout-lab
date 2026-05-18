@@ -1,9 +1,9 @@
-interface CompanyLogoProps {
+interface CheckoutLabIconProps {
   className?: string;
   size?: number;
 }
 
-export const CompanyLogo = ({ className, size = 120 }: CompanyLogoProps) => (
+export const CheckoutLabIcon = ({ className, size = 120 }: CheckoutLabIconProps) => (
   <svg
     width={size}
     height={Math.round(size * 0.4)}

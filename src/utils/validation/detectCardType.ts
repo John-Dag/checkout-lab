@@ -1,4 +1,6 @@
-export type CardType = 'visa' | 'mastercard' | 'amex' | 'discover' | null;
+import { type CardType } from '../../types/utils/validation/CardType';
+
+export type { CardType };
 
 export const detectCardType = (value: string): CardType => {
   const num = value.replace(/\D/g, '');

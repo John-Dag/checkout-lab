@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { TextInput } from '@mantine/core';
 import css from './TextInputGeneric.module.scss';
 import type { TextInputGenericProps } from '../../../types/components/ui/TextInputGeneric/TextInputGenericProps';
-import { validateEmail } from '../../../utils/validation/validateEmail';
 
 export const TextInputGeneric = ({
   name,
@@ -10,17 +9,14 @@ export const TextInputGeneric = ({
   placeholder,
   className,
   rightSection,
+  value = '',
+  maxLength,
+  onChange,
+  onBlur,
+  error,
 }: TextInputGenericProps) => {
   const [focused, setFocused] = useState(false);
-  const [value, setValue] = useState('');
-  const [error, setError] = useState<string | null>(null);
   const floating = value.trim().length !== 0 || focused || undefined;
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const next = event.currentTarget.value;
-    setValue(next);
-    setError(validateEmail(next));
-  };
 
   return (
     <TextInput
@@ -32,12 +28,18 @@ export const TextInputGeneric = ({
       classNames={css}
       value={value}
       error={error}
-      onChange={handleChange}
+      onChange={onChange}
       onFocus={() => setFocused(true)}
-      onBlur={() => setFocused(false)}
+      onBlur={() => {
+        setFocused(false);
+        onBlur?.();
+      }}
       mt="md"
+      size="md"
       autoComplete="nope"
+      maxLength={maxLength}
       data-floating={floating}
+      rightSection={rightSection}
       labelProps={{ 'data-floating': floating, 'data-error': error ? true : undefined }}
     />
   );

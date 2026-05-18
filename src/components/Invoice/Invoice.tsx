@@ -2,7 +2,7 @@ import { useEffect, Fragment } from 'react';
 import { fakeOrder } from '../../api/fakeData/fakeData';
 import css from './Invoice.module.scss';
 import { formatCurrency } from '../../utils/formatCurrency';
-import { CompanyLogo } from '../../assets/CompanyLogo';
+import { CheckoutLabIcon } from '../../assets/CheckoutLabIcon';
 
 export const Invoice = () => {
   const data = fakeOrder;
@@ -14,7 +14,7 @@ export const Invoice = () => {
       <div className={css.invoiceInner}>
         <div className={css.invoiceGrid}>
           <div className={css.invoiceLeft}>
-            <CompanyLogo />
+            <CheckoutLabIcon />
             <div className={css.invoiceMerchant}>{data?.merchantLabel}</div>
             <div className={css.invoiceTotal}>{formatCurrency(data?.total)}</div>
           </div>
@@ -31,7 +31,7 @@ export const Invoice = () => {
           ))}
         </div>
         <hr className={css.divider} />
-        <div className={css.invoiceItemGrid}>
+        <div className={css.invoiceTotalGrid}>
           <>
             <div className={css.invoiceLeft}>Tax</div>
             <div className={css.invoiceRight}>{formatCurrency(data.tax)}</div>

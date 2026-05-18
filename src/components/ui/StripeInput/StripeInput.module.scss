@@ -1,0 +1,68 @@
+.root {
+  position: relative;
+  margin-bottom: 35px;
+}
+
+.label {
+  position: absolute;
+  z-index: 2;
+  top: 9px;
+  left: var(--mantine-spacing-sm);
+  pointer-events: none;
+  font-size: var(--mantine-font-size-sm);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: var(--mantine-font-weight-medium);
+  font-size: var(--input-label-size);
+  color: light-dark(var(--mantine-color-gray-5), var(--mantine-color-dark-3));
+  transition:
+    transform 150ms ease,
+    font-size 150ms ease,
+    color 150ms ease;
+
+  &[data-floating] {
+    transform: translate(calc(var(--mantine-spacing-sm) * -1), -30px);
+    font-size: var(--mantine-font-size-xs);
+    font-weight: 500;
+    color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+  }
+}
+
+.field {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--mantine-spacing-sm);
+  border: calc(0.0625rem * var(--mantine-scale)) solid var(--mantine-color-default-border);
+  border-radius: 5px;
+  background-color: var(--mantine-color-default);
+  transition: border-color 100ms ease;
+
+  &[data-error] {
+    border-color: var(--mantine-color-error);
+  }
+
+  > div:first-child {
+    width: 100%;
+  }
+}
+
+.rightSection {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding-left: var(--mantine-spacing-xs);
+}
+
+.error {
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+  margin: 0;
+  font-size: var(--mantine-font-size-xs);
+  font-family: var(--mantine-font-family);
+  line-height: var(--mantine-line-height);
+  color: var(--mantine-color-error);
+  word-break: break-word;
+}
