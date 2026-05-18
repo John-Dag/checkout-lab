@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useStripe, useElements, CardNumberElement } from '@stripe/react-stripe-js';
 import { Button } from '@mantine/core';
@@ -20,6 +20,16 @@ export const CheckoutForm = ({
   const [submitted, setSubmitted] = useState(false);
   const [stripeValid, setStripeValid] = useState(false);
   const [paymentError, setPaymentError] = useState<string | null>(null);
+  const shippingContentRef = useRef<HTMLDivElement>(null);
+  const [shippingHeight, setShippingHeight] = useState(0);
+
+  useLayoutEffect(() => {
+    const el = shippingContentRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => setShippingHeight(el.scrollHeight));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   const { mutateAsync: fetchClientSecret, isPending } = useMutation({
     mutationFn: createPaymentIntent,
@@ -69,9 +79,11 @@ export const CheckoutForm = ({
       <div
         className={css.shippingWrapper}
         ref={shippingWrapperRef}
-        data-visible={!checked || undefined}
+        style={{ height: checked ? 0 : shippingHeight }}
       >
-        <ShippingForm form={shippingForm} />
+        <div ref={shippingContentRef}>
+          <ShippingForm form={shippingForm} />
+        </div>
       </div>
       {paymentError && <p className={css.paymentError}>{paymentError}</p>}
       <Button className={css.payButton} onClick={handleSubmit} loading={isPending}>

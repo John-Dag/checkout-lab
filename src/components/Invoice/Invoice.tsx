@@ -33,12 +33,16 @@ export const Invoice = () => {
         <hr className={css.divider} />
         <div className={css.invoiceTotalGrid}>
           <>
+            <div className={css.invoiceLeft}>Subtotal</div>
+            <div className={css.invoiceRight}>{formatCurrency(data?.subtotal) || "$0.00"}</div>
+          </>
+          <>
             <div className={css.invoiceLeft}>Tax</div>
-            <div className={css.invoiceRight}>{formatCurrency(data.tax)}</div>
+            <div className={css.invoiceRight}>{formatCurrency(data?.tax) || "$0.00"}</div>
           </>
           <>
             <div className={css.invoiceLeft}>Total</div>
-            <div className={css.invoiceRight}>{formatCurrency(data.total)}</div>
+            <div className={css.invoiceRight}>{formatCurrency(data?.total) || "$0.00"}</div>
           </>
         </div>
       </div>

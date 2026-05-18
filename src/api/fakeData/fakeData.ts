@@ -35,18 +35,11 @@ export const fakeOrder: CheckoutOrder = {
   discount: {
     code: 'SAVE10',
     label: '10% off',
-    amount: 32.5,
+    amount: 32.50,
   },
   shipping: 0,
+  subtotal: 304.97,
   tax: 27.24,
-  total: 28.5,
+  total: 332.21,
 };
 
-export const getSubtotal = (items: LineItem[]): number =>
-  items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);
-
-export const getTotal = (order: CheckoutOrder): number => {
-  const subtotal = getSubtotal(order.items);
-  const discount = order.discount?.amount ?? 0;
-  return subtotal - discount + order.shipping + order.tax;
-};

@@ -26,9 +26,6 @@
     color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
   }
 
-  &[data-error] {
-    color: var(--mantine-color-error);
-  }
 }
 
 .required {
@@ -49,7 +46,8 @@
 .input {
   border-radius: 5px;
 
-  &::placeholder {
+  &::placeholder,
+  &[data-error]::placeholder {
     transition: color 150ms ease;
     color: transparent;
   }

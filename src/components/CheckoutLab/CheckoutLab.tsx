@@ -6,12 +6,15 @@ import { Invoice } from '../Invoice/Invoice';
 import { LoadingScreen } from '../LoadingScreen/LoadingScreen';
 import { usePaymentForm, useShippingForm } from '../formData/formData';
 import { stripePromise, stripeAppearance } from '../../lib/stripe';
+import type { PaymentIntent } from '@stripe/stripe-js';
+import { Receipt } from '../Receipt/Receipt';
 
 const stripeOptions = { appearance: stripeAppearance };
 
 export const CheckoutLab = () => {
   const [checked, setChecked] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const [paymentIntent, setPaymentIntent] = useState<PaymentIntent>();
   const paymentForm = usePaymentForm();
   const shippingForm = useShippingForm();
 
@@ -32,7 +35,6 @@ export const CheckoutLab = () => {
     if (!column || !formStack || !shippingEl) return;
 
     const update = () => {
-      formStack.style.marginTop = '0px';
       const colH = column.clientHeight;
       const stackH = formStack.offsetHeight;
       const shippingH = shippingEl.offsetHeight;
@@ -58,6 +60,7 @@ export const CheckoutLab = () => {
       <div className={css.columnRight} ref={columnRef}>
         <div className={css.formStack} ref={formStackRef}>
           <Elements stripe={stripePromise} options={stripeOptions}>
+            {paymentIntent ? (
             <CheckoutForm
               checked={checked}
               setChecked={setChecked}
@@ -65,6 +68,9 @@ export const CheckoutLab = () => {
               shippingForm={shippingForm}
               shippingWrapperRef={shippingWrapperRef}
             />
+            ) : (
+              <Receipt />
+            )}
           </Elements>
         </div>
       </div>

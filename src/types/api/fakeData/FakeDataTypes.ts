@@ -20,5 +20,6 @@ export interface CheckoutOrder {
   discount?: Discount;
   shipping: number;
   tax: number;
+  subtotal: number;
   total: number;
 }
