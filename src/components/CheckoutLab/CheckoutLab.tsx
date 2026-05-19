@@ -1,20 +1,18 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { CheckoutForm } from '../CheckoutForm/CheckoutForm';
 import css from './CheckoutLab.module.scss';
 import { Invoice } from '../Invoice/Invoice';
-import { LoadingScreen } from '../LoadingScreen/LoadingScreen';
 import { usePaymentForm, useShippingForm } from '../formData/formData';
 import { stripePromise, stripeAppearance } from '../../lib/stripe';
 import type { PaymentIntent } from '@stripe/stripe-js';
 import { Receipt } from '../Receipt/Receipt';
-import { fakePaymentIntent } from '../../api/fakeData/fakeData';
+//import { fakePaymentIntent } from '../../api/fakeData/fakeData';
 
 const stripeOptions = { appearance: stripeAppearance };
 
 export const CheckoutLab = () => {
   const [checked, setChecked] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
   const [paymentIntent, setPaymentIntent] = useState<PaymentIntent>();
   const paymentForm = usePaymentForm();
   const shippingForm = useShippingForm();
@@ -22,12 +20,6 @@ export const CheckoutLab = () => {
   const columnRef = useRef<HTMLDivElement>(null);
   const formStackRef = useRef<HTMLDivElement>(null);
   const shippingWrapperRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 0);
-  }, []);
 
   useLayoutEffect(() => {
     const column = columnRef.current;
@@ -49,9 +41,7 @@ export const CheckoutLab = () => {
     ro.observe(formStack);
     update();
     return () => ro.disconnect();
-  }, [isLoading]);
-
-  if (isLoading) return <LoadingScreen />;
+  }, []);
 
   return (
     <div className={css.grid}>

@@ -12,7 +12,10 @@ import { StripeInput } from '../ui/StripeInput/StripeInput';
 import { cardIcons } from '../../utils/cardIcons';
 import { type PaymentFormProps } from '../../types/components/PaymentForm/PaymentFormProps';
 import { type StripeFieldState } from '../../types/components/ui/StripeInput/StripeInputProps';
+import { fakeOrder } from '../../api/fakeData/fakeData';
+import { InvoiceHeader } from '../InvoiceHeader/InvoiceHeader';
 
+// Custom styling for stripe inputs
 const stripeElementOptions = {
   style: {
     base: {
@@ -39,6 +42,7 @@ export const PaymentForm = ({
   submitted,
   onStripeValidityChange,
 }: PaymentFormProps) => {
+  const data = fakeOrder;
   const [card, setCard] = useState<StripeFieldState>(initialFieldState);
   const [expiry, setExpiry] = useState<StripeFieldState>(initialFieldState);
   const [cvv, setCvv] = useState<StripeFieldState>(initialFieldState);
@@ -60,6 +64,11 @@ export const PaymentForm = ({
   return (
     <div className={css.paymentForm}>
       <div className={css.inner}>
+        <InvoiceHeader
+          merchantLabel={data?.merchantLabel}
+          total={data?.total}
+          className={css.invoiceHeader}
+        />
         <div className={css.title}>Payment Info</div>
         <TextInputGeneric
           name="name"

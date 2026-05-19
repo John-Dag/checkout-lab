@@ -15,8 +15,8 @@ export const CheckoutLabIcon = ({ className, size = 120 }: CheckoutLabIconProps)
     aria-label="Checkout Lab"
   >
     {/* Mark: rounded square with cut corner */}
-    <rect x="0" y="4" width="40" height="40" rx="8" fill="white" fillOpacity="0.15" />
-    <rect x="4" y="8" width="32" height="32" rx="6" fill="white" fillOpacity="0.2" />
+    <rect x="0" y="4" width="40" height="40" rx="8" fill="#12b886" fillOpacity="0.25" />
+    <rect x="4" y="8" width="32" height="32" rx="6" fill="#12b886" fillOpacity="0.35" />
     {/* CL monogram */}
     <text
       x="20"

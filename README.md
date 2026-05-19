@@ -1,6 +1,6 @@
 # Checkout Lab
 
-A checkout form UI built with React 19, Mantine v9, and Stripe Elements. Includes a two-column layout with an invoice panel, payment form, and optional shipping form.
+A checkout application built with React 19, Mantine v9, and Stripe Elements. Includes a two-column layout with an invoice panel, payment form, and optional shipping form.
 
 ## Stack
 

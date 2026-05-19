@@ -40,6 +40,16 @@
   flex: 1;
 }
 
+.invoiceHeader {
+  --invoice-header-merchant-color: var(--mantine-color-gray-6);
+  --invoice-header-total-color: var(--text);
+  margin-bottom: 25px;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
 .shippingCheckbox {
   :hover {
     cursor: pointer;

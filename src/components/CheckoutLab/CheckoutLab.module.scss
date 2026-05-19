@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   height: 100%;
-  animation: fadeIn 400ms ease forwards;
+  animation: fadeIn 400ms ease-out;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -12,9 +12,11 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 

@@ -1,25 +1,16 @@
-import { useEffect, Fragment } from 'react';
+import { Fragment } from 'react';
 import { fakeOrder } from '../../api/fakeData/fakeData';
 import css from './Invoice.module.scss';
 import { formatCurrency } from '../../utils/formatCurrency';
-import { CheckoutLabIcon } from '../../assets/CheckoutLabIcon';
+import { InvoiceHeader } from '../InvoiceHeader/InvoiceHeader';
 
 export const Invoice = () => {
   const data = fakeOrder;
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+
   return (
     <div className={css.invoiceWrap}>
       <div className={css.invoiceInner}>
-        <div className={css.invoiceGrid}>
-          <div className={css.invoiceLeft}>
-            <CheckoutLabIcon />
-            <div className={css.invoiceMerchant}>{data?.merchantLabel}</div>
-            <div className={css.invoiceTotal}>{formatCurrency(data?.total)}</div>
-          </div>
-          <div className={css.invoiceRight}></div>
-        </div>
+        <InvoiceHeader merchantLabel={data.merchantLabel} total={data.total} />
         <div className={css.invoiceItemGrid}>
           {data.items.map((item) => (
             <Fragment key={item.id}>

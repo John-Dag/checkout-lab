@@ -1,0 +1,19 @@
+.left {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+}
+
+.right {
+  display: flex;
+  justify-content: end;
+}
+
+.merchant {
+  color: var(--invoice-header-merchant-color, var(--mantine-color-gray-5));
+}
+
+.total {
+  font-size: 28px;
+  color: var(--invoice-header-total-color, white);
+}
