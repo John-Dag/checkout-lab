@@ -21,6 +21,7 @@ export const CheckoutForm = ({
   const [submitted, setSubmitted] = useState(false);
   const [stripeValid, setStripeValid] = useState(false);
   const [paymentError, setPaymentError] = useState<string | null>(null);
+  const [isConfirming, setIsConfirming] = useState(false);
   const shippingContentRef = useRef<HTMLDivElement>(null);
   const [shippingHeight, setShippingHeight] = useState(0);
 
@@ -51,6 +52,7 @@ export const CheckoutForm = ({
 
     const { clientSecret } = await fetchClientSecret();
 
+    setIsConfirming(true);
     const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
         card: cardElement,
@@ -63,6 +65,7 @@ export const CheckoutForm = ({
 
     if (error) {
       setPaymentError(error.message ?? 'Payment failed');
+      setIsConfirming(false);
     } else if (paymentIntent?.status === 'succeeded') {
       onPaymentSuccess(paymentIntent);
     }
@@ -87,7 +90,7 @@ export const CheckoutForm = ({
         </div>
       </div>
       {paymentError && <p className={css.paymentError}>{paymentError}</p>}
-      <Button className={css.payButton} onClick={handleSubmit} loading={isPending}>
+      <Button className={css.payButton} onClick={handleSubmit} loading={isPending || isConfirming}>
         Pay
       </Button>
     </>
