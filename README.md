@@ -51,6 +51,21 @@ On submit:
 4. `stripe.confirmCardPayment` is called with the returned `client_secret`
 5. On success, the form unmounts and a Receipt component renders with the returned PaymentIntent data
 
+## Test cards
+
+This project runs on Stripe test keys — real card numbers will fail. Use any of these:
+
+| Card number             | Result                         |
+| ----------------------- | ------------------------------ |
+| `4242 4242 4242 4242`   | Visa — payment succeeds        |
+| `5555 5555 5555 4444`   | Mastercard — payment succeeds  |
+| `3782 822463 10005`     | Amex — payment succeeds        |
+| `6011 1111 1111 1117`   | Discover — payment succeeds    |
+| `4000 0000 0000 9995`   | Declined (insufficient funds)  |
+| `4000 0025 0000 3155`   | Requires 3D Secure auth        |
+
+Any future expiry date, any 3-digit CVC (4-digit for Amex), and any ZIP. Full list: [stripe.com/docs/testing](https://stripe.com/docs/testing).
+
 ## Project structure
 
 ```
