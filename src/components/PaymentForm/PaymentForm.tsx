@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js';
 import type {
   StripeCardNumberElementChangeEvent,
@@ -15,18 +15,18 @@ import { type StripeFieldState } from '../../types/components/ui/StripeInput/Str
 import { fakeOrder } from '../../api/fakeData/fakeData';
 import { InvoiceHeader } from '../InvoiceHeader/InvoiceHeader';
 
-// Custom styling for stripe inputs
-const stripeElementOptions = {
+const buildStripeOptions = (focused: boolean, placeholder?: string) => ({
+  placeholder,
   style: {
     base: {
       fontSize: '16px',
       fontFamily: 'system-ui, sans-serif',
       color: '#1a1a2e',
-      '::placeholder': { color: 'transparent' },
+      '::placeholder': { color: focused ? '#adb5bd' : 'transparent' },
     },
     invalid: { color: '#fa5252' },
   },
-};
+});
 
 const initialFieldState: StripeFieldState = {
   focused: false,
@@ -47,6 +47,17 @@ export const PaymentForm = ({
   const [expiry, setExpiry] = useState<StripeFieldState>(initialFieldState);
   const [cvv, setCvv] = useState<StripeFieldState>(initialFieldState);
   const [cardBrand, setCardBrand] = useState<string | null>(null);
+
+  // Custom placeholder for stripe inputs
+  const cardOptions = useMemo(
+    () => buildStripeOptions(card.focused, '1234 1234 1234 1234'),
+    [card.focused],
+  );
+  const expiryOptions = useMemo(
+    () => buildStripeOptions(expiry.focused, 'MM / YY'),
+    [expiry.focused],
+  );
+  const cvvOptions = useMemo(() => buildStripeOptions(cvv.focused, 'CVC'), [cvv.focused]);
 
   const handleChange = (
     set: React.Dispatch<React.SetStateAction<StripeFieldState>>,
@@ -91,7 +102,7 @@ export const PaymentForm = ({
           rightSection={cardBrand ? cardIcons[cardBrand] : undefined}
         >
           <CardNumberElement
-            options={stripeElementOptions}
+            options={cardOptions}
             onFocus={() => setCard((p) => ({ ...p, focused: true }))}
             onBlur={() => setCard((p) => ({ ...p, focused: false }))}
             onChange={(e) => {
@@ -108,7 +119,7 @@ export const PaymentForm = ({
             className={css.expiryCvv}
           >
             <CardCvcElement
-              options={stripeElementOptions}
+              options={cvvOptions}
               onFocus={() => setCvv((p) => ({ ...p, focused: true }))}
               onBlur={() => setCvv((p) => ({ ...p, focused: false }))}
               onChange={(e) => {
@@ -123,7 +134,7 @@ export const PaymentForm = ({
             className={css.expiryDate}
           >
             <CardExpiryElement
-              options={stripeElementOptions}
+              options={expiryOptions}
               onFocus={() => setExpiry((p) => ({ ...p, focused: true }))}
               onBlur={() => setExpiry((p) => ({ ...p, focused: false }))}
               onChange={(e) => {
