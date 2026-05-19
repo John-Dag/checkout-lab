@@ -8,6 +8,7 @@ import { usePaymentForm, useShippingForm } from '../formData/formData';
 import { stripePromise, stripeAppearance } from '../../lib/stripe';
 import type { PaymentIntent } from '@stripe/stripe-js';
 import { Receipt } from '../Receipt/Receipt';
+import { fakePaymentIntent } from '../../api/fakeData/fakeData';
 
 const stripeOptions = { appearance: stripeAppearance };
 
@@ -25,7 +26,7 @@ export const CheckoutLab = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 0);
   }, []);
 
   useLayoutEffect(() => {
@@ -39,7 +40,7 @@ export const CheckoutLab = () => {
       const stackH = formStack.offsetHeight;
       const shippingH = shippingEl.offsetHeight;
       const stableH = stackH - shippingH;
-      const margin = Math.max(40, Math.floor((colH - stableH) / 2));
+      const margin = Math.max(40, Math.floor((colH - stableH) / 2)) + 40;
       formStack.style.marginTop = `${margin}px`;
     };
 
@@ -58,21 +59,24 @@ export const CheckoutLab = () => {
         <Invoice />
       </div>
       <div className={css.columnRight} ref={columnRef}>
-        <div className={css.formStack} ref={formStackRef}>
-          <Elements stripe={stripePromise} options={stripeOptions}>
-            {paymentIntent ? (
-            <CheckoutForm
-              checked={checked}
-              setChecked={setChecked}
-              paymentForm={paymentForm}
-              shippingForm={shippingForm}
-              shippingWrapperRef={shippingWrapperRef}
-            />
-            ) : (
-              <Receipt />
-            )}
-          </Elements>
-        </div>
+        {paymentIntent ? (
+          <div className={css.receiptWrapper}>
+            <Receipt paymentIntent={paymentIntent} />
+          </div>
+        ) : (
+          <div className={css.formStack} ref={formStackRef}>
+            <Elements stripe={stripePromise} options={stripeOptions}>
+              <CheckoutForm
+                checked={checked}
+                setChecked={setChecked}
+                paymentForm={paymentForm}
+                shippingForm={shippingForm}
+                shippingWrapperRef={shippingWrapperRef}
+                onPaymentSuccess={setPaymentIntent}
+              />
+            </Elements>
+          </div>
+        )}
       </div>
     </div>
   );

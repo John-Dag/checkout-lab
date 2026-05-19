@@ -8,18 +8,25 @@
 }
 
 .invoiceInner {
-  width: 480px;
+  width: 100%;
+  max-width: 600px;
+  padding: 40px;
 }
 
 .invoiceGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 300px;
+  gap: clamp(0px, 45%, 400px);
+}
+
+.totalText {
+  font-weight: bold;
 }
 
 .invoiceLeft {
   display: flex;
   flex-direction: column;
+  min-width: 200px;
 }
 
 .invoiceRight {
@@ -41,13 +48,13 @@
   grid-template-columns: 1fr auto;
   gap: 15px;
   width: 100%;
-  margin-top: 24px;
+  margin-top: 40px;
 }
 
 .invoiceTotalGrid {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 10px;
+  gap: 3px;
   width: 100%;
   margin-top: 24px;
 }

@@ -1,3 +1,4 @@
+import type { PaymentIntent } from '@stripe/stripe-js';
 import {
   type LineItem,
   type Discount,
@@ -5,6 +6,16 @@ import {
 } from '../../types/api/fakeData/FakeDataTypes';
 
 export type { LineItem, Discount, CheckoutOrder };
+
+export const fakePaymentIntent = {
+  id: 'pi_3Rbc1XQhKmS0YlR400000000',
+  object: 'payment_intent',
+  amount: 33221,
+  amount_received: 33221,
+  currency: 'usd',
+  status: 'succeeded',
+  created: Math.floor(Date.now() / 1000),
+} as unknown as PaymentIntent;
 
 export const fakeOrder: CheckoutOrder = {
   orderId: 'ORD-2026-00142',
@@ -35,11 +46,10 @@ export const fakeOrder: CheckoutOrder = {
   discount: {
     code: 'SAVE10',
     label: '10% off',
-    amount: 32.50,
+    amount: 32.5,
   },
   shipping: 0,
   subtotal: 304.97,
   tax: 27.24,
   total: 332.21,
 };
-

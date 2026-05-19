@@ -24,13 +24,6 @@ export const ShippingForm = ({ form }: ShippingFormProps) => {
           {...form.getInputProps('name')}
         />
         <TextInputGeneric
-          name="email"
-          placeholder="Email"
-          label="Email"
-          className={css.textInputEmail}
-          {...form.getInputProps('email')}
-        />
-        <TextInputGeneric
           name="address"
           placeholder="Street address"
           label="Address"

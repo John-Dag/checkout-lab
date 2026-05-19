@@ -14,6 +14,7 @@ export const CheckoutForm = ({
   paymentForm,
   shippingForm,
   shippingWrapperRef,
+  onPaymentSuccess,
 }: CheckoutFormProps) => {
   const stripe = useStripe();
   const elements = useElements();
@@ -63,7 +64,7 @@ export const CheckoutForm = ({
     if (error) {
       setPaymentError(error.message ?? 'Payment failed');
     } else if (paymentIntent?.status === 'succeeded') {
-      console.log('Payment succeeded!', paymentIntent);
+      onPaymentSuccess(paymentIntent);
     }
   };
 

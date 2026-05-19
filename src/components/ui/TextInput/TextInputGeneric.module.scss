@@ -25,7 +25,6 @@
     font-weight: 500;
     color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
   }
-
 }
 
 .required {
@@ -39,7 +38,7 @@
 
 .error {
   position: absolute;
-  bottom: -18px;
+  bottom: -16px;
   font-size: var(--mantine-font-size-xs);
 }
 

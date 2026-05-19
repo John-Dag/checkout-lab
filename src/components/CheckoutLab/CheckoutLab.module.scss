@@ -3,6 +3,10 @@
   grid-template-columns: 1fr 1fr;
   height: 100%;
   animation: fadeIn 400ms ease forwards;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 @keyframes fadeIn {
@@ -15,15 +19,14 @@
 }
 
 .columnLeft {
-  background-color: black;
-  display: flex;
-}
-
-.columnLeft {
   background-color: var(--mantine-color-black);
   display: flex;
   height: 100%;
   width: 100%;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .columnRight {
@@ -42,6 +45,12 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100%;
   padding-bottom: 40px;
+}
+
+.receiptWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
