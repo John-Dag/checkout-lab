@@ -8,7 +8,7 @@ import {
 export type { LineItem, Discount, CheckoutOrder };
 
 export const fakePaymentIntent = {
-  id: 'pi_3Rbc1XQhKmS0YlR400000000',
+  id: 'pi_3Rbc1XQhKmS0YlR40000000',
   object: 'payment_intent',
   amount: 33221,
   amount_received: 33221,
