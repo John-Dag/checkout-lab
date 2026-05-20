@@ -30,3 +30,5 @@ Thumbs.db
 
 # Generated SCSS types
 src/**/*.module.scss.d.ts
+
+.vercel

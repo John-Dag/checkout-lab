@@ -7,11 +7,13 @@ import { usePaymentForm, useShippingForm } from '../formData/formData';
 import { stripePromise, stripeAppearance } from '../../lib/stripe';
 import type { PaymentIntent } from '@stripe/stripe-js';
 import { Receipt } from '../Receipt/Receipt';
-//import { fakePaymentIntent } from '../../api/fakeData/fakeData';
+import { useMerchant } from '../../hooks/useMerchant';
+import { CheckoutLabSkeleton } from '../Skeletons/CheckoutLabSkeleton/CheckoutLabSkeleton';
 
 const stripeOptions = { appearance: stripeAppearance };
 
 export const CheckoutLab = () => {
+  const { isLoading } = useMerchant();
   const [checked, setChecked] = useState(true);
   const [paymentIntent, setPaymentIntent] = useState<PaymentIntent>();
   const paymentForm = usePaymentForm();
@@ -41,7 +43,9 @@ export const CheckoutLab = () => {
     ro.observe(formStack);
     update();
     return () => ro.disconnect();
-  }, []);
+  }, [isLoading]);
+
+  if (isLoading) return <CheckoutLabSkeleton />;
 
   return (
     <div className={css.grid}>

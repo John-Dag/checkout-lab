@@ -1,40 +1,45 @@
 import { Fragment } from 'react';
-import { fakeOrder } from '../../api/fakeData/fakeData';
+import { useMerchant } from '../../hooks/useMerchant';
 import css from './Invoice.module.scss';
 import { formatCurrency } from '../../utils/formatCurrency';
 import { InvoiceHeader } from '../InvoiceHeader/InvoiceHeader';
+import { getTotal } from '../../utils/getTotal';
 
 export const Invoice = () => {
-  const data = fakeOrder;
+  const { data } = useMerchant();
+  const products = data?.products ?? [];
 
   return (
     <div className={css.invoiceWrap}>
       <div className={css.invoiceInner}>
-        <InvoiceHeader merchantLabel={data.merchantLabel} total={data.total} />
+        <InvoiceHeader
+          merchantLabel={data?.merchant?.business_profile?.name ?? ''}
+          total={getTotal(products)}
+        />
         <div className={css.invoiceItemGrid}>
-          {data.items.map((item) => (
-            <Fragment key={item.id}>
-              <div className={css.invoiceLeft}>
-                {item.quantity}x {item.name}
-              </div>
-              <div className={css.invoiceRight}>{formatCurrency(item.unitPrice)}</div>
-            </Fragment>
-          ))}
+          {products.map((item) => {
+            const price = item.default_price;
+            const unitAmount = price && typeof price !== 'string' ? (price.unit_amount ?? 0) : 0;
+            return (
+              <Fragment key={item.id}>
+                <div className={css.invoiceLeft}>
+                  {item.metadata?.quantity || 1}x {item.name}
+                </div>
+                <div className={css.invoiceRight}>{formatCurrency(unitAmount / 100)}</div>
+              </Fragment>
+            );
+          })}
         </div>
         <hr className={css.divider} />
         <div className={css.invoiceTotalGrid}>
           <>
             <div className={css.invoiceLeft}>Subtotal</div>
-            <div className={css.invoiceRight}>{formatCurrency(data?.subtotal) || '$0.00'}</div>
-          </>
-          <>
-            <div className={css.invoiceLeft}>Tax</div>
-            <div className={css.invoiceRight}>{formatCurrency(data?.tax) || '$0.00'}</div>
+            <div className={css.invoiceRight}>{formatCurrency(getTotal(products))}</div>
           </>
           <>
             <div className={`${css.invoiceLeft} ${css.totalText}`}>Total</div>
             <div className={`${css.invoiceRight} ${css.totalText}`}>
-              {formatCurrency(data?.total) || '$0.00'}
+              {formatCurrency(getTotal(products))}
             </div>
           </>
         </div>

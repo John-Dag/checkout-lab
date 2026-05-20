@@ -12,8 +12,9 @@ import { StripeInput } from '../ui/StripeInput/StripeInput';
 import { cardIcons } from '../../utils/cardIcons';
 import { type PaymentFormProps } from '../../types/components/PaymentForm/PaymentFormProps';
 import { type StripeFieldState } from '../../types/components/ui/StripeInput/StripeInputProps';
-import { fakeOrder } from '../../api/fakeData/fakeData';
+import { useMerchant } from '../../hooks/useMerchant';
 import { InvoiceHeader } from '../InvoiceHeader/InvoiceHeader';
+import { getTotal } from '../../utils/getTotal';
 
 const buildStripeOptions = (focused: boolean, placeholder?: string) => ({
   placeholder,
@@ -42,7 +43,7 @@ export const PaymentForm = ({
   submitted,
   onStripeValidityChange,
 }: PaymentFormProps) => {
-  const data = fakeOrder;
+  const { data }: any = useMerchant();
   const [card, setCard] = useState<StripeFieldState>(initialFieldState);
   const [expiry, setExpiry] = useState<StripeFieldState>(initialFieldState);
   const [cvv, setCvv] = useState<StripeFieldState>(initialFieldState);
@@ -76,8 +77,8 @@ export const PaymentForm = ({
     <div className={css.paymentForm}>
       <div className={css.inner}>
         <InvoiceHeader
-          merchantLabel={data?.merchantLabel}
-          total={data?.total}
+          merchantLabel={data?.merchant?.business_profile?.name}
+          total={getTotal(data?.products)}
           className={css.invoiceHeader}
         />
         <div className={css.title}>Payment Info</div>
