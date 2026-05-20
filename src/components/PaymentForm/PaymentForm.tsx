@@ -73,6 +73,14 @@ export const PaymentForm = ({
   const getError = (state: StripeFieldState, label: string) =>
     state.error ?? (submitted && !state.hasValue ? `${label} is required` : undefined);
 
+  const handleBillingStateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.currentTarget.value
+      .replace(/[^a-zA-Z]/g, '')
+      .slice(0, 2)
+      .toUpperCase();
+    form.setFieldValue('billingState', val);
+  };
+
   return (
     <div className={css.paymentForm}>
       <div className={css.inner}>
@@ -96,6 +104,40 @@ export const PaymentForm = ({
           className={css.textInputEmail}
           {...form.getInputProps('email')}
         />
+        <TextInputGeneric
+          name="billingAddress"
+          placeholder="Street address"
+          label="Billing address"
+          className={css.textInputName}
+          {...form.getInputProps('billingAddress')}
+        />
+        <div className={css.billingRow}>
+          <TextInputGeneric
+            name="billingCity"
+            placeholder="City"
+            label="City"
+            className={css.billingCity}
+            {...form.getInputProps('billingCity')}
+          />
+          <TextInputGeneric
+            name="billingState"
+            placeholder="State"
+            label="State"
+            className={css.billingState}
+            value={form.values.billingState}
+            onChange={handleBillingStateChange}
+            onBlur={() => form.validateField('billingState')}
+            error={form.errors.billingState}
+          />
+          <TextInputGeneric
+            name="billingZip"
+            placeholder="ZIP"
+            label="ZIP"
+            className={css.billingZip}
+            maxLength={5}
+            {...form.getInputProps('billingZip')}
+          />
+        </div>
         <StripeInput
           label="Card number"
           state={{ ...card, error: getError(card, 'Card number') }}
@@ -149,7 +191,7 @@ export const PaymentForm = ({
           className={css.shippingCheckbox}
           checked={checked}
           onChange={(event) => setChecked(event.currentTarget.checked)}
-          label="Billing address is same as shipping"
+          label="Shipping address is same as billing"
         />
       </div>
     </div>

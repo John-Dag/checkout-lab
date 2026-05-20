@@ -11,7 +11,7 @@
 .title {
   color: var(--text);
   margin-bottom: 15px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .inner {
@@ -28,7 +28,7 @@
 .expiryInputs {
   display: flex;
   flex-direction: row;
-  gap: 30px;
+  gap: 16px;
   width: 100%;
 }
 
@@ -36,7 +36,35 @@
   flex: 1;
 }
 
+.zip {
+  flex: 2;
+}
+
 .expiryCvv {
+  flex: 1;
+}
+
+.billingRow {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.billingCity {
+  flex: 2;
+}
+
+.billingState {
+  flex: 1;
+}
+
+.billingZip {
   flex: 1;
 }
 
