@@ -22,6 +22,12 @@ export const CheckoutLabSkeleton = () => (
         <div className={css.skeletonFieldRow}>
           <div className={css.skeletonFieldHalf} />
           <div className={css.skeletonFieldHalf} />
+          <div className={css.skeletonFieldHalf} />
+        </div>
+        <div className={css.skeletonField} />
+        <div className={css.skeletonFieldRow}>
+          <div className={css.skeletonFieldHalf} />
+          <div className={css.skeletonFieldHalf} />
         </div>
         <div className={css.skeletonButton} />
       </div>

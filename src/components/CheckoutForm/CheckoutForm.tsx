@@ -52,6 +52,28 @@ export const CheckoutForm = ({
 
     const { clientSecret } = await fetchClientSecret();
 
+    const shipping = checked
+      ? {
+          name: paymentForm.values.name,
+          address: {
+            line1: paymentForm.values.billingAddress,
+            city: paymentForm.values.billingCity,
+            state: paymentForm.values.billingState,
+            postal_code: paymentForm.values.billingZip,
+            country: 'US',
+          },
+        }
+      : {
+          name: shippingForm.values.name,
+          address: {
+            line1: shippingForm.values.address,
+            city: shippingForm.values.city,
+            state: shippingForm.values.state,
+            postal_code: shippingForm.values.zip,
+            country: 'US',
+          },
+        };
+
     setIsConfirming(true);
     const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
@@ -59,8 +81,16 @@ export const CheckoutForm = ({
         billing_details: {
           name: paymentForm.values.name,
           email: paymentForm.values.email,
+          address: {
+            line1: paymentForm.values.billingAddress,
+            city: paymentForm.values.billingCity,
+            state: paymentForm.values.billingState,
+            postal_code: paymentForm.values.billingZip,
+            country: 'US',
+          },
         },
       },
+      shipping,
     });
 
     if (error) {
