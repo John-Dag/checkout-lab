@@ -66,42 +66,6 @@ This project runs on Stripe test keys — real card numbers will fail. Use any o
 
 Any future expiry date, any 3-digit CVC (4-digit for Amex), and any ZIP. Full list: [stripe.com/docs/testing](https://stripe.com/docs/testing).
 
-## Project structure
-
-```
-api/
-  create-payment-intent.ts   # Vercel serverless function — creates Stripe PaymentIntent
-
-src/
-  api/                       # Frontend data calls (payment.ts → /api endpoint, fakeData.ts)
-  assets/                    # SVG icon components (CheckoutLabIcon, CheckmarkIcon)
-  components/
-    CheckoutLab/             # Root layout, ResizeObserver centering logic
-    CheckoutForm/            # Stripe hooks, submit handler, pay button
-    PaymentForm/             # Card fields, name, email, billing checkbox
-    ShippingForm/            # Address fields with US state validation
-    Invoice/                 # Left-column order summary
-    InvoiceHeader/           # Reusable logo + merchant + total block
-    Receipt/                 # Post-payment success view
-    LoadingScreen/           # Two-column skeleton matching the app layout
-    ui/
-      TextInput/             # Mantine floating label input wrapper
-      StripeInput/           # Stripe iframe floating label wrapper
-      icons/cards/           # Visa, Mastercard, Amex, Discover SVG icons
-  formData/                  # usePaymentForm, useShippingForm hooks
-  lib/                       # stripe.ts — loadStripe + appearance config
-  types/                     # TypeScript interfaces (mirrors src/ structure)
-  utils/                     # formatCurrency, cardIcons, orderCalculations, validation
-```
-
-## Forms
-
-Form state and validation live in `src/components/formData/formData.ts`.
-
-**Payment** — name (required), email (valid format), card fields (Stripe)
-
-**Shipping** — name, email, address, city, state (valid US state abbreviation), ZIP (5-digit or ZIP+4)
-
 ## Deployment
 
 Hosted on Vercel. The `api/` folder contains the serverless function for PaymentIntent creation. Required environment variables in Vercel:
