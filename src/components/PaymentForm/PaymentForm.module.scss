@@ -68,6 +68,12 @@
   flex: 1;
 }
 
+.cardLabel {
+  label {
+    left: 45px;
+  }
+}
+
 .invoiceHeader {
   --invoice-header-merchant-color: var(--mantine-color-gray-6);
   --invoice-header-total-color: var(--text);

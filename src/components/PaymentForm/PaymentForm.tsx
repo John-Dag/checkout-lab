@@ -9,7 +9,6 @@ import { Checkbox } from '@mantine/core';
 import css from './PaymentForm.module.scss';
 import { TextInputGeneric } from '../ui/TextInput/TextInputGeneric';
 import { StripeInput } from '../ui/StripeInput/StripeInput';
-import { cardIcons } from '../../utils/cardIcons';
 import { type PaymentFormProps } from '../../types/components/PaymentForm/PaymentFormProps';
 import { type StripeFieldState } from '../../types/components/ui/StripeInput/StripeInputProps';
 import { useMerchant } from '../../hooks/useMerchant';
@@ -47,11 +46,10 @@ export const PaymentForm = ({
   const [card, setCard] = useState<StripeFieldState>(initialFieldState);
   const [expiry, setExpiry] = useState<StripeFieldState>(initialFieldState);
   const [cvv, setCvv] = useState<StripeFieldState>(initialFieldState);
-  const [cardBrand, setCardBrand] = useState<string | null>(null);
 
   // Custom placeholder for stripe inputs
   const cardOptions = useMemo(
-    () => buildStripeOptions(card.focused, '1234 1234 1234 1234'),
+    () => ({ ...buildStripeOptions(card.focused, '1234 1234 1234 1234'), showIcon: true }),
     [card.focused],
   );
   const expiryOptions = useMemo(
@@ -141,8 +139,7 @@ export const PaymentForm = ({
         <StripeInput
           label="Card number"
           state={{ ...card, error: getError(card, 'Card number') }}
-          className={css.textInputName}
-          rightSection={cardBrand ? cardIcons[cardBrand] : undefined}
+          className={`${css.textInputName} ${css.cardLabel}`}
         >
           <CardNumberElement
             options={cardOptions}
@@ -150,7 +147,6 @@ export const PaymentForm = ({
             onBlur={() => setCard((p) => ({ ...p, focused: false }))}
             onChange={(e) => {
               handleChange(setCard, e);
-              setCardBrand(e.brand);
               onStripeValidityChange(e.complete && expiry.complete && cvv.complete);
             }}
           />
