@@ -71,6 +71,10 @@
 .cardLabel {
   label {
     left: 45px;
+
+    &[data-floating] {
+      transform: translate(calc(var(--mantine-spacing-sm) * -3.7), -28px);
+    }
   }
 }
 
