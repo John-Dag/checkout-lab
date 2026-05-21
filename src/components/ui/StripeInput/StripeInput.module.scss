@@ -20,7 +20,7 @@
     color 150ms ease;
 
   &[data-floating] {
-    transform: translate(calc(var(--mantine-spacing-sm) * -1), -30px);
+    transform: translate(calc(var(--mantine-spacing-sm) * -1), -28px);
     font-size: var(--mantine-font-size-xs);
     font-weight: 500;
     color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
