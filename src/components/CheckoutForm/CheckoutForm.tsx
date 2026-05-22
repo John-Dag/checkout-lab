@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useStripe, useElements, CardNumberElement } from '@stripe/react-stripe-js';
 import { Button } from '@mantine/core';
@@ -14,6 +14,7 @@ export const CheckoutForm = ({
   paymentForm,
   shippingForm,
   shippingWrapperRef,
+  columnRef,
   onPaymentSuccess,
 }: CheckoutFormProps) => {
   const stripe = useStripe();
@@ -32,6 +33,15 @@ export const CheckoutForm = ({
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
+
+  // Scroll to the bottom once the shipping section finishes expanding
+  useEffect(() => {
+    if (checked) return;
+    setTimeout(() => {
+      const col = columnRef.current;
+      col?.scrollTo({ top: col.scrollHeight, behavior: 'smooth' });
+    }, 400);
+  }, [checked]);
 
   const { mutateAsync: fetchClientSecret, isPending } = useMutation({
     mutationFn: createPaymentIntent,
