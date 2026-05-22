@@ -9,5 +9,6 @@ export interface CheckoutFormProps {
   paymentForm: UseFormReturnType<PaymentFormValues>;
   shippingForm: UseFormReturnType<ShippingFormValues>;
   shippingWrapperRef: React.RefObject<HTMLDivElement | null>;
+  columnRef: React.RefObject<HTMLDivElement | null>;
   onPaymentSuccess: (intent: PaymentIntent) => void;
 }

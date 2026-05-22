@@ -66,6 +66,7 @@ export const CheckoutLab = () => {
                 paymentForm={paymentForm}
                 shippingForm={shippingForm}
                 shippingWrapperRef={shippingWrapperRef}
+                columnRef={columnRef}
                 onPaymentSuccess={setPaymentIntent}
               />
             </Elements>
