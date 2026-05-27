@@ -42,7 +42,7 @@ export const PaymentForm = ({
   submitted,
   onStripeValidityChange,
 }: PaymentFormProps) => {
-  const { data }: any = useMerchant();
+  const { data } = useMerchant();
   const [card, setCard] = useState<StripeFieldState>(initialFieldState);
   const [expiry, setExpiry] = useState<StripeFieldState>(initialFieldState);
   const [cvv, setCvv] = useState<StripeFieldState>(initialFieldState);
@@ -83,8 +83,8 @@ export const PaymentForm = ({
     <div className={css.paymentForm}>
       <div className={css.inner}>
         <InvoiceHeader
-          merchantLabel={data?.merchant?.business_profile?.name}
-          total={getTotal(data?.products)}
+          merchantLabel={data?.merchant?.business_profile?.name ?? ''}
+          total={getTotal(data?.products ?? [])}
           className={css.invoiceHeader}
         />
         <div className={css.title}>Payment Info</div>
