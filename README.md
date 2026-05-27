@@ -1,6 +1,6 @@
 # Checkout Lab
 
-A checkout application built with React 19, Mantine v9, and Stripe Elements. Merchant details and a product list are pulled from a Stripe Connect test account. Setup your own stripe test account with a connect merchant and products to build your own checkout.
+A checkout application built with React 19, Mantine v9, and Stripe Elements. Merchant details and a product list are pulled from a Stripe Connect test account. Set up your own stripe test account with a connect merchant and products to build your own checkout.
 
 **Live demo:** https://checkout-lab-iota.vercel.app/
 
