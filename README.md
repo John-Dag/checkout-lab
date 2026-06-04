@@ -1,5 +1,11 @@
 # Checkout Lab
 
+[![Vercel](https://vercelbadge.vercel.app/api/John-Dag/checkout-lab)](https://checkout-lab-iota.vercel.app/)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
+![Stripe](https://img.shields.io/badge/Stripe-Connect-635BFF?logo=stripe&logoColor=white)
+
 A checkout application built with React 19, Mantine v9, and Stripe Elements. Merchant details and a product list are pulled from a Stripe Connect test account. Set up your own stripe test account with a connect merchant and products to build your own checkout (See below for Stripe test card numbers).
 
 **Live demo:** https://checkout-lab-iota.vercel.app/
