@@ -5,8 +5,9 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
 ![Stripe](https://img.shields.io/badge/Stripe-Connect-635BFF?logo=stripe&logoColor=white)
+![Claude](https://img.shields.io/badge/Claude-D97757?logo=anthropic&logoColor=white)
 
-A checkout application built with React 19, Mantine v9, and Stripe Elements. Merchant details and a product list are pulled from a Stripe Connect test account. Set up your own stripe test account with a connect merchant and products to build your own checkout (See below for Stripe test card numbers).
+A checkout application built with React 19, Mantine v9, Stripe Elements, and a Claude assistant integration. Merchant details and a product list are pulled from a Stripe Connect test account. Set up your own Stripe test account with a connect merchant and products to build your own checkout (See below for Stripe test card numbers).
 
 **Live demo:** https://checkout-lab-iota.vercel.app/
 
@@ -24,12 +25,13 @@ A checkout application built with React 19, Mantine v9, and Stripe Elements. Mer
 pnpm install
 ```
 
-Create a `.env` file with your Stripe keys and connected account ID:
+Create a `.env` file with your Stripe keys and connected account ID. There is an optional anthropic API key if you'd like to use the claude support feature:
 
 ```env
 VITE_STRIPE_PUBLISHABLE_KEY=pk_test_...
 STRIPE_SECRET_KEY=sk_test_...
 MERCHANT_ACCOUNT_ID=acct_...
+ANTHROPIC_API_KEY=...
 ```
 
 `vercel dev` loads `.env` for both the Vite frontend and the serverless functions, so run:
@@ -67,6 +69,16 @@ This project runs on Stripe test keys — real card numbers will fail. Use any o
 
 Any future expiry date, any 3-digit CVC (4-digit for Amex), and any ZIP. Full list: [stripe.com/docs/testing](https://stripe.com/docs/testing).
 
+## Support assistant
+
+A floating chat panel ("Ask Claude") in the bottom-right answers customer questions about the products and checkout. The `/api/support` serverless function:
+
+1. Fetches the connected merchant and products from your Stripe test account.
+2. Builds a strict system prompt from the test data.
+3. Calls Claude (`claude-sonnet-4-6`) with adaptive thinking and `cache_control` on the system block.
+
+The assistant is intentionally limited. It won't invent products or prices, and it directs out-of-scope questions back to the merchant.
+
 ## Forms
 
 Form state and validation live in `src/components/formData/formData.ts`.
@@ -82,6 +94,7 @@ Hosted on Vercel. The `api/` folder contains the serverless functions. Required 
 - `VITE_STRIPE_PUBLISHABLE_KEY` (Production + Preview)
 - `STRIPE_SECRET_KEY` (Production + Preview + Development)
 - `MERCHANT_ACCOUNT_ID` (Production + Preview + Development)
+- `ANTHROPIC_API_KEY` (Production + Preview + Development)
 
 ## Scripts
 
