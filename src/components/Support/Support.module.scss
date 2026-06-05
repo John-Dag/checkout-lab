@@ -1,0 +1,165 @@
+.fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 100;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: var(--mantine-color-teal-6);
+  color: white;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  transition:
+    background-color 150ms ease,
+    transform 150ms ease;
+
+  &:hover {
+    background: var(--mantine-color-teal-7);
+    transform: translateY(-1px);
+  }
+}
+
+.panel {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 100;
+  width: calc(100vw - 48px);
+  max-width: 360px;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border: 1px solid var(--mantine-color-gray-3);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  transform-origin: bottom center;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--mantine-color-teal-6);
+  color: white;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+  opacity: 0.8;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.thread {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 120px;
+  max-height: 360px;
+}
+
+.empty {
+  color: var(--mantine-color-gray-6);
+  font-size: 13px;
+  text-align: center;
+  padding: 24px 0;
+}
+
+.turn {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.userBubble {
+  align-self: flex-end;
+  background: var(--mantine-color-teal-6);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 12px 12px 4px 12px;
+  font-size: 14px;
+  max-width: 85%;
+  word-wrap: break-word;
+}
+
+.botBubble {
+  align-self: flex-start;
+  background: var(--mantine-color-gray-1);
+  color: var(--mantine-color-black);
+  padding: 8px 12px;
+  border-radius: 12px 12px 12px 4px;
+  font-size: 14px;
+  max-width: 85%;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.inputRow {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--mantine-color-gray-2);
+  align-items: flex-end;
+
+  input {
+    padding-top: 30px !important;
+  }
+}
+
+.input {
+  flex: 1;
+}
+
+.bouncingLoader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bouncingLoader > div {
+  width: 2px;
+  height: 2px;
+  margin: 0 2px;
+  border-radius: 50%;
+  background-color: var(--mantine-color-black); /* Customize your color here */
+  opacity: 1;
+  animation: bouncingAnimation 0.6s infinite alternate;
+}
+
+@keyframes bouncingAnimation {
+  to {
+    opacity: 0.2;
+    transform: translateY(-5px);
+  }
+}
+
+/* Stagger the dots animation */
+.bouncingLoader > div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.bouncingLoader > div:nth-child(3) {
+  animation-delay: 0.4s;
+}

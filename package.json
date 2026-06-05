@@ -14,6 +14,7 @@
     "format:check": "prettier --check \"src/**/*.{ts,tsx,scss,css}\""
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.100.1",
     "@mantine/core": "^9.1.1",
     "@mantine/form": "^9.2.1",
     "@mantine/hooks": "^9.1.1",
