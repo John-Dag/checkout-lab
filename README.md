@@ -1,6 +1,7 @@
 # Checkout Lab
 
 [![Vercel](https://vercelbadge.vercel.app/api/John-Dag/checkout-lab)](https://checkout-lab-iota.vercel.app/)
+[![CI](https://github.com/John-Dag/checkout-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/John-Dag/checkout-lab/actions/workflows/ci.yml)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
