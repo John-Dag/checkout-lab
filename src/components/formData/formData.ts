@@ -3,6 +3,14 @@ import {
   type PaymentFormValues,
   type ShippingFormValues,
 } from '../../types/components/formData/FormDataTypes';
+import {
+  validateName,
+  validateEmail,
+  validateAddress,
+  validateCity,
+  validateState,
+  validateZip,
+} from './validators';
 
 export type { PaymentFormValues, ShippingFormValues };
 
@@ -17,17 +25,12 @@ export const usePaymentForm = () =>
       billingZip: '',
     },
     validate: {
-      name: (v) => (v.trim().length < 2 ? 'Name is required' : null),
-      email: (v) => (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? null : 'Invalid email address'),
-      billingAddress: (v) => (v.trim().length < 5 ? 'Address is required' : null),
-      billingCity: (v) => (v.trim().length < 2 ? 'City is required' : null),
-      billingState: (v) =>
-        /^(AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC)$/i.test(
-          v.trim(),
-        )
-          ? null
-          : 'Invalid state',
-      billingZip: (v) => (/^\d{5}(-\d{4})?$/.test(v) ? null : 'Invalid ZIP'),
+      name: validateName,
+      email: validateEmail,
+      billingAddress: validateAddress,
+      billingCity: validateCity,
+      billingState: validateState,
+      billingZip: validateZip,
     },
     validateInputOnBlur: true,
   });
@@ -42,16 +45,11 @@ export const useShippingForm = () =>
       zip: '',
     },
     validate: {
-      name: (v) => (v.trim().length < 2 ? 'Name is required' : null),
-      address: (v) => (v.trim().length < 5 ? 'Address is required' : null),
-      city: (v) => (v.trim().length < 2 ? 'City is required' : null),
-      state: (v) =>
-        /^(AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC)$/i.test(
-          v.trim(),
-        )
-          ? null
-          : 'Invalid state',
-      zip: (v) => (/^\d{5}(-\d{4})?$/.test(v) ? null : 'Invalid ZIP code'),
+      name: validateName,
+      address: validateAddress,
+      city: validateCity,
+      state: validateState,
+      zip: validateZip,
     },
     validateInputOnBlur: true,
   });
