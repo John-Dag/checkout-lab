@@ -7,6 +7,7 @@ export const StripeInput = ({
   className,
   children,
   rightSection,
+  helperText,
 }: StripeInputProps) => (
   <div className={`${css.root}${className ? ` ${className}` : ''}`}>
     <label
@@ -24,6 +25,10 @@ export const StripeInput = ({
       {children}
       {rightSection && <div className={css.rightSection}>{rightSection}</div>}
     </div>
-    {state.error && <p className={css.error}>{state.error}</p>}
+    {state.error ? (
+      <p className={css.error}>{state.error}</p>
+    ) : helperText ? (
+      <p className={css.helperText}>{helperText}</p>
+    ) : null}
   </div>
 );

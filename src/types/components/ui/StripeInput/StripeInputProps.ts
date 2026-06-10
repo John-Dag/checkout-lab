@@ -13,4 +13,5 @@ export interface StripeInputProps {
   className?: string;
   children: React.ReactNode;
   rightSection?: React.ReactNode;
+  helperText?: string;
 }

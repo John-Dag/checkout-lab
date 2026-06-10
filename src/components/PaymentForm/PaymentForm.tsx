@@ -140,6 +140,7 @@ export const PaymentForm = ({
           label="Card number"
           state={{ ...card, error: getError(card, 'Card number') }}
           className={`${css.textInputName} ${css.cardLabel}`}
+          helperText="Use Stripe test card 4242 4242 4242 4242 (see GitHub README for more)"
         >
           <CardNumberElement
             options={cardOptions}
