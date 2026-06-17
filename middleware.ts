@@ -6,11 +6,11 @@ export const config = {
 
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' https://js.stripe.com https://va.vercel-scripts.com",
+  "script-src 'self' https://js.stripe.com https://va.vercel-scripts.com https://vercel.live",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https://*.stripe.com",
   "font-src 'self'",
-  "connect-src 'self' https://api.stripe.com https://m.stripe.network https://q.stripe.com https://vitals.vercel-insights.com",
+  "connect-src 'self' https://api.stripe.com https://m.stripe.network https://q.stripe.com https://vitals.vercel-insights.com https://vercel.live",
   "frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://m.stripe.network https://b.stripecdn.com https://newassets.hcaptcha.com",
   "worker-src 'self' blob:",
   "object-src 'none'",
