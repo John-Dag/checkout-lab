@@ -22,15 +22,6 @@ const CSP = [
 export default function middleware() {
   const response = next();
 
-  // VERCEL_ENV is 'production' | 'preview' | 'development' (the last one = `vercel dev` locally).
-  // Skip security headers locally so HMR and dev-time experimentation aren't constrained.
-  const isPublicDeployment =
-    process.env.VERCEL_ENV === 'production' || process.env.VERCEL_ENV === 'preview';
-
-  if (!isPublicDeployment) {
-    return response;
-  }
-
   response.headers.set('Content-Security-Policy', CSP);
   response.headers.set('X-Content-Type-Options', 'nosniff');
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
