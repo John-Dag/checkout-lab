@@ -11,7 +11,7 @@ const CSP = [
   "img-src 'self' data: https://*.stripe.com",
   "font-src 'self'",
   "connect-src 'self' https://api.stripe.com https://m.stripe.network https://q.stripe.com https://vitals.vercel-insights.com https://vercel.live",
-  "frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://m.stripe.network https://b.stripecdn.com https://newassets.hcaptcha.com",
+  "frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://m.stripe.network https://b.stripecdn.com https://newassets.hcaptcha.com https://vercel.live",
   "worker-src 'self' blob:",
   "object-src 'none'",
   "base-uri 'self'",
