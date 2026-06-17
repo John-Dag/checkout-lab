@@ -1,7 +1,7 @@
 # Checkout Lab
 
 ## Package manager
-Always use **pnpm**. Never use npm or yarn.
+Always use **pnpm**. Use socket firewall for all pnpm installs **sfw pnpm**. Never use npm or yarn.
 
 ## Tech stack
 - React 19, TypeScript, Vite
